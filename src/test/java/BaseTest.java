@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeClass;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 
 public class BaseTest {
     AndroidDriver driver;
@@ -26,6 +27,7 @@ public class BaseTest {
         options.setDeviceName("Pixel6API31");
         options.setApp("D:\\Automation Project\\MyAppiumProject\\src\\main\\resources\\ApiDemos-debug.apk");
         driver = new AndroidDriver(new URL("http://172.16.4.180:4723"), options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
     }
 
