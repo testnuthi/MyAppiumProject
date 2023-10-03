@@ -25,7 +25,8 @@ public class BaseTest {
 
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName("Pixel6API31");
-        options.setApp("D:\\Automation Project\\MyAppiumProject\\src\\main\\resources\\ApiDemos-debug.apk");
+//        options.setApp("D:\\Automation Project\\MyAppiumProject\\src\\main\\resources\\ApiDemos-debug.apk");
+        options.setApp("D:\\Automation Project\\MyAppiumProject\\src\\main\\resources\\General-Store.apk");
         driver = new AndroidDriver(new URL("http://172.16.4.180:4723"), options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
