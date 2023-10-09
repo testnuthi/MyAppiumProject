@@ -37,6 +37,6 @@ public class BaseTest {
          // stop server
          driver.quit();
          // stop appium server using AppiumServiceBuilder
-//         service.stop();
+         service.stop();
      }
 }

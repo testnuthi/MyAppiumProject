@@ -16,6 +16,7 @@ public class eCommerce extends BaseTest {
         // 1. Fill the form details and verify Toast error message displayed appropriately for wrong inputs
         String country = "Angola";
         driver.findElement(By.id("com.androidsample.generalstore:id/spinnerCountry")).click();
+        Thread.sleep(1000);
         driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\""+ country +"\"));"));
         Thread.sleep(2000);
         driver.findElement(By.xpath("//android.widget.TextView[@text='"+country+"']")).click();
@@ -36,16 +37,17 @@ public class eCommerce extends BaseTest {
         String[] itemsList = {"Air Jordan 1 Mid SE","Jordan 6 Rings","PG 3"};
         List<Float> priceList = new LinkedList<>();
         Thread.sleep(1000);
-//        int productCount = driver.findElements(By.id("com.androidsample.generalstore:id/productName")).size();
         for (int i=0; i<itemsList.length; i++) {
             driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\""+ itemsList[i] +"\"));"));
-            Thread.sleep(2000);
-            // bug hereeeeeeeeeeeeee
-            float price = Float.parseFloat((driver.findElements(By.id("com.androidsample.generalstore:id/productPrice")).get(i).getText().substring(1)));
-            priceList.add(price);
-            Thread.sleep(1000);
-            driver.findElements(By.id("com.androidsample.generalstore:id/productAddCart")).get(i).click();
-            Thread.sleep(1000);
+            String productName = driver.findElements(By.id("com.androidsample.generalstore:id/productName")).get(i).getText();
+            if (Arrays.stream(itemsList).anyMatch(item -> item.equalsIgnoreCase(productName))) {
+                float price = Float.parseFloat((driver.findElements(By.id("com.androidsample.generalstore:id/productPrice")).get(0).getText().substring(1)));
+                priceList.add(price);
+                Thread.sleep(1000);
+                driver.findElements(By.id("com.androidsample.generalstore:id/productAddCart")).get(0).click();
+                Thread.sleep(1000);
+            }
+            System.out.println("count i....." + i);
         }
         Thread.sleep(1000);
         int itemCount = Integer.parseInt(driver.findElement(By.id("com.androidsample.generalstore:id/counterText")).getText());
@@ -58,6 +60,7 @@ public class eCommerce extends BaseTest {
         wait.until(ExpectedConditions.attributeContains(By.id("com.androidsample.generalstore:id/toolbar_title"),"text","Cart"));
         Thread.sleep(1000);
         for (WebElement ele : driver.findElements(By.id("com.androidsample.generalstore:id/productName"))) {
+            Thread.sleep(2000);
             Assert.assertTrue(Arrays.stream(itemsList).anyMatch(item -> item.equalsIgnoreCase(ele.getText())));
         }
         float realTotalAmount = Float.parseFloat((driver.findElement(By.id("com.androidsample.generalstore:id/totalAmountLbl")).getText().substring(1)));
