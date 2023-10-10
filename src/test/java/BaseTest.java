@@ -1,9 +1,14 @@
+import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -25,6 +30,8 @@ public class BaseTest {
 
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName("Pixel6API31");
+        options.setChromedriverExecutable("D:\\Automation Project\\MyAppiumProject\\src\\main\\resources\\chromedriver.exe");
+
 //        options.setApp("D:\\Automation Project\\MyAppiumProject\\src\\main\\resources\\ApiDemos-debug.apk");
         options.setApp("D:\\Automation Project\\MyAppiumProject\\src\\main\\resources\\General-Store.apk");
         driver = new AndroidDriver(new URL("http://172.16.4.180:4723"), options);
@@ -37,6 +44,13 @@ public class BaseTest {
          // stop server
          driver.quit();
          // stop appium server using AppiumServiceBuilder
-         service.stop();
+//         service.stop();
      }
+
+    @Test
+    public void longPressAction(WebElement webElement) {
+        ((JavascriptExecutor) driver).executeScript("mobile: longClickGesture",
+                ImmutableMap.of("elementId", ((RemoteWebElement) webElement).getId()
+        ));
+    }
 }
