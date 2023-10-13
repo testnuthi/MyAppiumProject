@@ -64,13 +64,13 @@ public class eCommerce extends BaseTest {
         Assert.assertEquals(sum, realTotalAmount);
 
         // validate mobile gesture of app (tap, long, press)
-        Thread.sleep(500);
-        longPressAction(driver.findElement(By.id("com.androidsample.generalstore:id/termsButton")));
         Thread.sleep(1000);
+        longPressAction(driver.findElement(By.id("com.androidsample.generalstore:id/termsButton")));
+        Thread.sleep(3000);
         Assert.assertEquals(driver.findElement(By.id("com.androidsample.generalstore:id/alertTitle")).getText(),"Terms Of Conditions");
-        Thread.sleep(500);
+        Thread.sleep(1000);
         driver.findElement(By.id("android:id/button1")).click();
-        Thread.sleep(300);
+        Thread.sleep(1000);
         driver.findElement(By.className("android.widget.CheckBox")).click();
         driver.findElement(By.id("com.androidsample.generalstore:id/btnProceed")).click();
         Thread.sleep(6000);
@@ -79,10 +79,16 @@ public class eCommerce extends BaseTest {
         for (String contextName : contexts) {
             System.out.println("contextName:  "+contextName);
         }
-        driver.context("WEBVIEW_com.androidsample.generalstore");
+        Thread.sleep(1000);
+//        driver.context("WEBVIEW_com.androidsample.generalstore");
+        Thread.sleep(1000);
         driver.findElement(By.name("q")).sendKeys("nutest 123");
+        Thread.sleep(1000);
         driver.findElement(By.name("q")).sendKeys(Keys.ENTER);
+        Thread.sleep(2000);
         driver.pressKey(new KeyEvent(AndroidKey.BACK));
+        Thread.sleep(1000);
         driver.context("NATIVE_APP");
+        Thread.sleep(3000);
     }
 }

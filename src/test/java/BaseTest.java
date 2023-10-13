@@ -31,6 +31,7 @@ public class BaseTest {
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName("Pixel6API31");
         options.setChromedriverExecutable("D:\\Automation Project\\MyAppiumProject\\src\\main\\resources\\chromedriver.exe");
+        options.setCapability("browser","Chrome");
 
 //        options.setApp("D:\\Automation Project\\MyAppiumProject\\src\\main\\resources\\ApiDemos-debug.apk");
         options.setApp("D:\\Automation Project\\MyAppiumProject\\src\\main\\resources\\General-Store.apk");
